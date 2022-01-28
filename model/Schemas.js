@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const EmployeeSchema = mongoose.Schema({
-	// employeeCode: {
-	// 	type: String,
-	// 	required: true
-	// },
+	employeeCode: {
+		type: String,
+		required: true
+	},
 	firstName: {
 		type: String,
 		required: true

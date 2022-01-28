@@ -4,23 +4,37 @@ const Employees = require('../model/Schemas.js'); // imports employee schema
 
 //=========STORES EMPLOYEE DATA==========
 router.post('/employeedetails', async (req, res) => {
+	const {
+		employeeCode,
+		firstName,
+		middleName,
+		lastName,
+		gender,
+		contactNumber,
+		email,
+		panCard,
+		dob,
+		address
+	} = req.body;
+
 	const data = new Employees({
-		//employeeCode: req.body.employeeCode,
-		firstName: req.body.firstName,
-		middleName: req.body.middleName,
-		lastName: req.body.lastName,
-		gender: req.body.gender,
-		contactNumber: req.body.contactNumber,
-		email: req.body.email,
-		panCard: req.body.panCard,
-		dob: req.body.dob,
-		address: req.body.address
+		employeeCode,
+		firstName,
+		middleName,
+		lastName,
+		gender,
+		contactNumber,
+		email,
+		panCard,
+		dob,
+		address
 	});
 
 	try {
 		const savedData = await data.save();
 		// res.end(JSON.stringify(savedData));
 		res.json(savedData);
+		console.log(savedData);
 	} catch (error) {
 		res.json({ message: error });
 	}
@@ -50,7 +64,7 @@ router.get('/employeedetails/:id', async (req, res) => {
 //=========DELETE EMPLOYEE DATA BY  ID========
 router.delete('/employeedetails/:id', async (req, res) => {
 	try {
-		const deletedIndividual = await Employees.remove({ _id: req.params.id });
+		const deletedIndividual = await Employees.deleteOne({ _id: req.params.id });
 		res.json(deletedIndividual);
 	} catch (error) {
 		res.json({ message: error });
